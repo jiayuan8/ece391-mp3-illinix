@@ -1,0 +1,35 @@
+boot.o: boot.S multiboot.h x86_desc.h types.h
+int_linkage.o: int_linkage.S
+syscall_linkage.o: syscall_linkage.S
+x86_desc.o: x86_desc.S x86_desc.h types.h
+exception.o: exception.c exception.h lib.h types.h x86_desc.h syscall.h \
+  paging.h filesystem.h rtc.h terminal.h keyboard.h i8259.h sb16.h
+filesystem.o: filesystem.c filesystem.h types.h lib.h syscall.h paging.h \
+  rtc.h terminal.h keyboard.h i8259.h sb16.h x86_desc.h exception.h
+i8259.o: i8259.c i8259.h types.h lib.h
+idt.o: idt.c idt.h x86_desc.h types.h exception.h lib.h syscall.h \
+  paging.h filesystem.h rtc.h terminal.h keyboard.h i8259.h sb16.h \
+  int_linkage.h scheduling.h syscall_linkage.h
+kernel.o: kernel.c multiboot.h types.h x86_desc.h lib.h i8259.h debug.h \
+  tests.h idt.h exception.h syscall.h paging.h filesystem.h rtc.h \
+  terminal.h keyboard.h sb16.h int_linkage.h scheduling.h \
+  syscall_linkage.h
+keyboard.o: keyboard.c keyboard.h lib.h types.h i8259.h sb16.h syscall.h \
+  paging.h filesystem.h rtc.h terminal.h x86_desc.h exception.h
+lib.o: lib.c lib.h types.h
+paging.o: paging.c paging.h lib.h types.h
+rtc.o: rtc.c rtc.h types.h idt.h x86_desc.h exception.h lib.h syscall.h \
+  paging.h filesystem.h terminal.h keyboard.h i8259.h sb16.h \
+  int_linkage.h scheduling.h syscall_linkage.h
+sb16.o: sb16.c sb16.h types.h lib.h syscall.h paging.h filesystem.h rtc.h \
+  terminal.h keyboard.h i8259.h x86_desc.h exception.h
+scheduling.o: scheduling.c scheduling.h i8259.h types.h terminal.h lib.h \
+  keyboard.h sb16.h syscall.h paging.h filesystem.h rtc.h x86_desc.h \
+  exception.h
+syscall.o: syscall.c syscall.h types.h paging.h lib.h filesystem.h rtc.h \
+  terminal.h keyboard.h i8259.h sb16.h x86_desc.h exception.h
+terminal.o: terminal.c terminal.h lib.h types.h keyboard.h i8259.h sb16.h \
+  syscall.h paging.h filesystem.h rtc.h x86_desc.h exception.h
+tests.o: tests.c tests.h x86_desc.h types.h lib.h int_linkage.h idt.h \
+  exception.h syscall.h paging.h filesystem.h rtc.h terminal.h keyboard.h \
+  i8259.h sb16.h scheduling.h syscall_linkage.h
